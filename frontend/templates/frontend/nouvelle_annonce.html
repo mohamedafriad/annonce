@@ -1,0 +1,66 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block extrahead %}
+<style>
+.scrollview {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="row gx-4 gx-lg-5 align-items-center my-2">
+  <div class="col-sm-12">
+    <div class="card h-100">
+      <div class="card-header text-center">
+        <h4 class="font-weight-light">Ajouter une annonce</h4>
+        <p>{{ form.errors }}</p>
+      </div>
+      <div class="card-body col-sm-12">
+        <form class="row g-3" action="" method="post">{% csrf_token %}
+          <div class="col-md-12 hidden" >
+            <input type="text" class="form-control text-center hidden" hidden required name="centre" id="centre" value="{{ centre.pk }}" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="nom_annonceur">Nom complet</label>
+            <input type="text" class="form-control" name="nom_annonceur" id="nom_annonceur" placeholder="Votre nom complet ici ..." />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Votre email ici ..." />
+          </div>
+          <div class="col-md-12">
+            <label class="form-label" for="type_annonce">Type</label>
+            <select class="form-select text-center" required name="type_annonce">
+              <option value="0">Type annonce</option>
+              {% for type in type_visite %}
+                <option value="{{ type.0 }}">{{ type.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label" for="contenu">Texte de l'annonce</label>
+            <textarea class="form-control" name="contenu" id="contenu" placeholder="Votre annonce ici ..."></textarea>
+          </div>
+      </div>
+      
+      <div class="card-footer col-12 text-center d-flex justify-content-between">
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Publier</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extrascripts %}
+<script>
+  $(document).ready(function() {
+      $('select#beneficiaire').select2();
+      var span=document.querySelector('.selection>span');
+      span.classList.add('form-control');
+  });
+</script>
+{% endblock %}

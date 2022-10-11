@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-28 02:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: centres/apps.py:7
+msgid "centres"
+msgstr "المراكز"
+
+#: centres/models.py:8
+msgid "Urbain"
+msgstr "حضري"
+
+#: centres/models.py:9
+msgid "Rural"
+msgstr "قروي"
+
+#: centres/models.py:13
+msgid "Nom Région(ar)"
+msgstr "اسم الجهة بالعربية"
+
+#: centres/models.py:14
+msgid "Nom Région(fr)"
+msgstr "اسم الجهة بالفرنسية"
+
+#: centres/models.py:24 centres/models.py:35 centres/models.py:57
+#: centres/models.py:90
+msgid "Région"
+msgstr "الجهة"
+
+#: centres/models.py:25
+msgid "Régions"
+msgstr "الجهات"
+
+#: centres/models.py:29
+msgid "Nom Province(ar)"
+msgstr "اسم الإقليم بالعربية"
+
+#: centres/models.py:30
+msgid "Nom Province(fr)"
+msgstr "اسم الإقليم بالفرنسية"
+
+#: centres/models.py:46 centres/models.py:63 centres/models.py:97
+msgid "Province"
+msgstr "الإقليم"
+
+#: centres/models.py:47
+msgid "Provinces"
+msgstr "العمالات والأقاليم"
+
+#: centres/models.py:51
+msgid "Nom Commune(ar)"
+msgstr "اسم الجماعةبالعربية"
+
+#: centres/models.py:52
+msgid "Nom Commune(fr)"
+msgstr " اسم الجماعة بالفرنسية"
+
+#: centres/models.py:65
+msgid "Milieu"
+msgstr "الوسط"
+
+#: centres/models.py:75 centres/models.py:104
+msgid "Commune"
+msgstr "الجماعة"
+
+#: centres/models.py:76
+msgid "Communes"
+msgstr "الجماعات"
+
+#: centres/models.py:87
+msgid "Nom"
+msgstr "الإسم"
+
+#: centres/models.py:109
+msgid "Téléphone"
+msgstr "الهاتف"
+
+#: centres/models.py:110
+msgid "Fax"
+msgstr "الفاكس"
+
+#: centres/models.py:111
+msgid "E-mail"
+msgstr "البريد الالكتروني"
+
+#: centres/models.py:112
+msgid "Adresse"
+msgstr "العنوان"
+
+#: centres/models.py:114
+msgid "latitude"
+msgstr "خط العرض"
+
+#: centres/models.py:115
+msgid "longitude"
+msgstr "خط الطول"
+
+#: centres/models.py:116
+msgid "Type Centre"
+msgstr "نوع المركز"
+
+#: centres/models.py:122
+msgid "Centre"
+msgstr "المركز"
+
+#: centres/models.py:123
+msgid "Centres"
+msgstr "المراكز"
+
+#: centres/models.py:141
+msgid "Organisme"
+msgstr "الهيئة"
+
+#: centres/models.py:148
+msgid "Membre"
+msgstr "المستعمل"
+
+#: centres/models.py:149
+msgid "Membres"
+msgstr "المستعملين"
+
+#: centres/models.py:153
+msgid "Nom Prestation"
+msgstr "عنوان الخدمة"
+
+#: centres/models.py:160
+msgid "Prestation"
+msgstr "الخدمة"
+
+#: centres/models.py:161
+msgid "Prestations"
+msgstr "الخدمات"
+
+#~ msgid "Gérant"
+#~ msgstr "المجموعة المسيرة"
+
+#, fuzzy
+#~| msgid "Adresse"
+#~ msgid "Addresses"
+#~ msgstr "العنوان"

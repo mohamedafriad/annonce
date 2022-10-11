@@ -1,0 +1,45 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load i18n grp_tags %}{% load qr_code %}
+{% block title %}خدماتي - COAPH - المشاريع المدرة للدخل{% endblock %}
+{% block extrahead %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+{% block content %}
+<div class="row gx-1 gx-lg-1 my-4 d-flex align-items-center justify-content-center">
+  <div class="col-md-6 col-sm-12">
+    <div class="card shadow-lg">
+      <div class="card-header">
+        <h3 class="col-12 text-center">البحث عن مستفيد(ة)</h3>
+      </div>
+      <div class="card-body">
+        <form method="get" class="form d-flex align-items-center justify-content-between" action="">
+            <div class="col-8">
+              <input class="form-control" type="text" name="cin" required placeholder="رقم البطاقة الوطنية" id="cin"/>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-custom h-100" id="get_dem" type="sumbit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if error %}
+<div class="row d-flex justify-content-center my-2 justify-content-center">
+     <p class="alert alert-danger col-md-10 col-sm-12"><i class="fas fa-circle-exclamation"></i> لا يوجد أي مستفيد تطابق معلوماته معلومات البحث.
+     هل هو مستفيد جديد؟ تفضل بإدخال معلوماته بالضغط على الزر أسفله 
+    </p>
+</div>
+<div class="row justify-content-center my-2">
+  <a class="btn btn-custom col-md-3 col-sm-6 text-center" href="{% url 'b-beneficiaire-add' %}"><i class="fas fa-user-plus"></i> إضافة مستفيد</a>
+</div>
+{% else %}
+<div class="row my-2 justify-content-center">
+  <p class="alert btn-custom col-md-8 col-sm-12 text-center"><i class="fas fa-circle-exclamation"></i> المرجو إدخال معلومات البحث في الخانات المخصصة لذلك قبل الضغط على زر البحث. وشكرا</p>
+</div>
+{% endif %}
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load i18n grp_tags %}
+{% block title %}Contactez nous{% endblock %}
+{% block extrahead %}
+{% endblock %}
+{% block content %}
+<!-- Heading Row-->
+  <div class="row gx-4 gx-lg-5 align-items-center my-5">
+    <div class="col-sm-12 col-md-6 h-100">
+      <div class="card shadow-lg h-100">
+        <div class="card-header text-center">
+          <h3 class="font-weight-light">Nos cordonnées</h3>
+        </div>
+        <div class="card-body h-100">
+          <p><i class="fa fa-phone fa-2xl"></i> : Téléphone</p>
+          <p><i class="fas fa-at fa-2xl"></i> : Email </p>
+          <p><i class="fa fa-map-location fa-2xl"></i> : Adresse</p>
+        </div>
+        <div class="card-footer col-sm-12 text-center">
+          <div class="col-md-12 d-flex justify-content-between">
+            <a class="btn btn-secondary"><i class="fa-brands fa-linkedin fa-2xl"></i> Linkedin</a>
+            <a class="btn btn-primary"><i class="fa-brands fa-facebook fa-2xl"></i> Facebook</a>
+            <a class="btn btn-custom"><i class="fa-brands fa-whatsapp fa-2xl"></i> Whatsapp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <div class="card h-100 shadow-lg">
+        <div class="card-header text-center">
+          <h3 class="font-weight-light">Laissez nous un message <i class="far fa-message"></i></h3>
+        </div>
+        <div class="card-body col-sm-12">
+          <form class="row g-3" action="" method="POST">{% csrf_token %}
+            <div class="col-md-12">
+              <label class="form-label" for="nom">Nom</label>
+              <input type="text" class="form-control" name="nom" placeholder="Votre nom ici ..." required/>
+            </div>
+            <div class="col-md-12">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" class="form-control" name="email" placeholder="Votre email ici ..." required/>
+            </div>
+            <div class="col-md-12">
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-control" name="message" placeholder="Votre message ici ..." required></textarea>
+            </div>
+        </div>
+        <div class="card-footer col-sm-12 text-center">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block extrahead %}
+<style>
+.scrollview {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+</style>
+{% endblock %}
+{% block content %}
+{% if messages %}
+  <div class="row justify-content-center">
+    {% for message in messages %}
+      <p class="alert alert-danger text-white col-12 text-center"><i class="fas fa-calendar-check"></i> {{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+<div class="row gx-4 gx-lg-5 align-items-center my-2">
+  <div class="col-sm-12">
+    <div class="card h-100">
+      <div class="card-header text-center">
+        <h1 class="font-weight-light">إضافة مستفيد(ة)</h1>
+      </div>
+      <div class="card-body col-sm-12">
+        
+        <form class="row g-3" action="" method="post">{% csrf_token %}
+          <div class="col-md-6">
+            <label class="form-label" for="cin">رقم البطاقة الوطنية</label>
+            <input type="text" class="form-control  text-center" name="cin" required placeholder="مثلا : J00000 بدون فراغات" {% if error %}value="{{ form.cin.value }}"{% endif %} />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="date_naissance">تاريخ الازدياد</label>
+            <input type="text" class="form-control text-center" id="date_naissance" required name="date_naissance" placeholder="تاريخ الازدياد" {% if error %}value="{{ form.date_naissance.value }}"{% endif %} />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="nom_ben">الاسم العائلي</label>
+            <input type="text" class="form-control text-center" id="nom_ar" required name="nom_ar" placeholder="الاسم العائلي" {% if error %}value="{{ form.nom_ar.value }}"{% endif %} />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="prenom_ben">الاسم الشخصي</label>
+            <input type="text" class="form-control text-center" id="prenom_ar" required name="prenom_ar" placeholder="الاسم الشخصي" {% if error %}value="{{ form.prenom_ar.value }}"{% endif %} />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="genre"> النوع</label>
+            <select class="form-select form-select-lg text-center fs-6" required name="genre" id="genre">
+              {% for genre in  genres %}
+                <option value="{{ genre.0 }}" {% if genre.0 == form.genre.value %}selected{%endif%}>{{ genre.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="lieu_naissance"> مكان الازدياد</label>
+            <input type="text" class="form-control text-center" name="lieu_naissance" id="lieu_naissance" placeholder="مكان الازدياد " {% if error %}value="{{ form.lieu_naissance.value }}"{% endif %}/>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="adresse_commune">الجماعة </label>
+            <select class="form-select text-center" name="adresse_commune" required id="adresse_commune" {% if error %}value="{{ form.adresse_commune.value }}"{% endif %}>
+              {% for commune in  communes %}
+                <option value="{{ commune.pk }}">{{ commune.nom }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="adresse">العنوان </label>
+            <input type="text" class="form-control text-center" name="adresse" placeholder="العنوان" {% if error %}value="{{ form.adresse.value }}"{% endif %} />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="telephone">الهاتف </label>
+            <input type="tel" class="form-control text-center" name="telephone" id="telephone" required placeholder="الهاتف" pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" {% if error %}value="{{ form.telephone.value }}"{% endif %}/>
+          </div>
+      </div>
+      <div class="card-footer col-12 text-center d-flex justify-content-between">
+        <div class="col-12">
+          <button class="btn btn-custom btn-lg" type="submit"><i class="fas fa-save"></i> حفظ</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extrascripts %}
+<script>
+  $(document).ready(function() {
+    $('#adresse_commune').select2();
+    var span=document.querySelector('.selection>span');
+    span.classList.add('form-control', 'h-100');
+  });
+  jQuery(function($){
+    $("#telephone").mask("09-99-99-99-99");
+    $("#date_naissance").mask("9999-99-99");    
+  });
+</script>
+{% endblock %}

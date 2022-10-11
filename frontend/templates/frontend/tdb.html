@@ -1,0 +1,54 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block extrahead %}
+<style>
+.scrollview {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="row gx-4 gx-lg-5 align-items-center justify-content-center my-2">
+    <div class="card text-center col-sm-12 col-md-6 shadow-lg px-0" >
+      <div class="card-header text-center col-md-12 bg-info">
+        <h4 class="col-md-12 text-white px-0"><i class="fa fa-vault"></i> Mon Solde</h4>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">Mon solde actuel est de : </h4>
+        <h4 class="card-title">10 Annonce(s)</h4>
+      </div>
+      <div class="card-footer text-center">
+        <a href="{% url 'packs' %}" class="btn btn-custom">Alimenter mon solde</a>
+      </div>
+    </div>
+</div>
+<hr />
+<div class="row justify-content-between">
+  <div class="card text-center col-sm-12 col-md-3 shadow-lg px-0" >
+    <div class="card-header text-center col-md-12 btn-custom">
+      <h4 class="col-md-12 text-white px-0"><i class="fa-solid fa-bullhorn"></i> Total Annonces</h4>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title">1</h1>
+    </div>
+  </div>
+  <div class="card text-center col-sm-12 col-md-3 shadow-lg px-0" >
+    <div class="card-header text-center col-md-12 bg-primary">
+      <h4 class="col-md-12 text-white px-0"><i class="fa fa-thumbs-up"></i> Publiées</h4>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title">1</h1>
+    </div>
+  </div>
+  <div class="card text-center col-sm-12 col-md-3 shadow-lg px-0" >
+    <div class="card-header text-center col-md-12 bg-danger">
+      <h4 class="col-md-12 text-white px-0"><i class="fa fa-hourglass-start"></i> En attente</h4>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title">0</h1>
+    </div>
+  </div>
+</div>
+{% endblock %}

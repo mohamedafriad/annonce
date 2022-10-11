@@ -1,0 +1,59 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block extrahead %}
+<style>
+.scrollview {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="row gx-4 gx-lg-5 align-items-center justify-content-center my-2">
+    <!-- PACK Standard-->
+    <div class="card text-center col-sm-12 col-md-4 shadow-lg px-0" >
+        <div class="card-header text-center col-md-12 bg-info">
+        <h4 class="col-md-12 text-white px-0">Pack Standard</h4>
+        </div>
+        <img class="card-img-top" src="{% static 'frontend/img/pack.png' %}" alt="Img Pack">      <div class="card-body">
+        <h4 class="card-title">10 annonces</h4>
+        <p class="card-text">prix unitaire : 130 dhs ttc</p>
+          <p class="card-text">prix du pack : 1300 dhs ttc</p>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-info text-white"><i class="fa-solid fa-cart-plus"></i> Commander</a>
+      </div>
+    </div>
+    <!-- PACK Professionnel -->
+    <div class="card text-center col-sm-12 col-md-4 shadow-lg px-0">
+        <div class="card-header text-center col-md-12 btn-custom">
+            <h4 class="col-md-12 text-white px-0">Pack Professionnel</h4>
+        </div>
+        <img class="card-img-top" src="{% static 'frontend/img/pack.png' %}" alt="Img Pack">
+        <div class="card-body">
+          <h4 class="card-title">20 annonces</h4>
+          <p class="card-text">prix unitaire : 120 dhs ttc</p>
+          <p class="card-text">prix du pack : 2400 dhs ttc</p>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-custom text-white"><i class="fa-solid fa-cart-plus"></i> Commander</a>
+        </div>
+      </div>
+      <!-- PACK Expert -->
+      <div class="card text-center col-sm-12 col-md-4 shadow-lg px-0">
+        <div class="card-header text-center col-md-12 bg-primary">
+            <h4 class="col-md-12 text-white px-0">Pack Expert</h4>
+        </div>
+        <img class="card-img-top" src="{% static 'frontend/img/pack.png' %}" alt="Img Pack">
+        <div class="card-body">
+          <h4 class="card-title">50 annonces</h4>
+          <p class="card-text">prix unitaire : 100 dhs ttc</p>
+          <p class="card-text">prix du pack : 5000 dhs ttc</p>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary text-white"><i class="fa-solid fa-cart-plus"></i> Commander</a>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

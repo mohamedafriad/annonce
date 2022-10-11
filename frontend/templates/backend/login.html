@@ -1,0 +1,40 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load i18n grp_tags %}
+{% block title %}Connexion{% endblock %}
+{% block extrahead %}
+{% endblock %}
+{% block content %}
+<!-- Heading Row-->
+  <div class="row gx-4 gx-lg-5 d-flex align-items-center justify-content-center my-5">
+    <div class="col-md-6 col-sm-12">
+      <div class="card h-100 shadow-lg">
+        <div class="card-header text-center">
+          <h1 class="font-weight-light">Connexion </h1>
+        </div>
+        <div class="card-body col-12">
+          {% if messages %}
+          <div class="d-flex justify-content-center col-12 my-4">
+            <p class="alert alert-danger col-12"><i class="fas fa-circle-exclamation"></i> Veuillez compléter correctement les champs « nom d’utilisateur » et « mot de passe » d'un compte autorisé. Sachez que les deux champs peuvent être sensibles à la casse.
+              </p>
+          </div>
+          {% endif %}
+          <form class="row g-2" method="post">{% csrf_token %}
+            <div class="col-12">
+              <label class="form-label" for="username"><i class="fas fa-user"></i> Utilisateur </label>
+              <input type="text" class="form-control" name="username" required placeholder="Ici vote nom d'utilisateur" />
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="password"><i class="fas fa-key"></i> Mot de passe </label>
+              <input type="password" class="form-control" name="password" required placeholder="Ici vote mot de passe" />
+            </div>
+        </div>
+        <div class="card-footer col-12 text-center">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary" href="{% url 'b-login' %}"><i class="fas fa-right-to-bracket"></i> Se connecter</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

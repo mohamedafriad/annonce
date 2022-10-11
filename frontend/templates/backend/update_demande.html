@@ -1,0 +1,89 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block extrahead %}
+<style>
+.scrollview {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="row gx-4 gx-lg-5 align-items-center my-2">
+  <div class="col-sm-12">
+    <div class="card h-100">
+      <div class="card-header text-center">
+        <h4 class="font-weight-light">تعديل الطلب</h4>
+        <p>{{ form.errors }}</p>
+      </div>
+      <div class="card-body col-sm-12">
+        <form class="row g-3" action="" method="post">{% csrf_token %}
+          <div class="col-md-6" >
+            <label class="form-label" for="centre">المركز</label>
+            <select class="form-select text-center" required name="centre">
+              <option value="{{ demande.centre.pk }}" selected>{{ demande.centre }}</option>
+            </select>          
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="beneficiaire">المستفيد(ة)</label>
+            <select class="form-select text-center" required name="beneficiaire">
+              <option value="{{ demande.beneficiaire.pk }}" selected>{{ demande.beneficiaire }}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="slug_demande">رمز الطلب</label>
+            <input type="text" class="form-control  text-center" readonly name="slug_demande" id="slug_demande" value="{{ demande.slug }}" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="date_demande">تاريخ الطلب</label>
+            <input type="text" class="form-control text-center" readonly name="date_demande" id="date_demande" placeholder="تاريخ الطلب" value="{{ demande.date_demande|date:'Y-m-d' }}" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="prestation">الخدمة المطلوبة</label>
+            <select class="form-select text-center" name="prestation">
+                <option value="{{ demande.prestation.pk }}">{{ demande.prestation.nom }}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="appareil_demande">الجهاز المطلوب</label>
+            <input type="text" class="form-control" readonly name="appareil_demande" id="appareil_demande"  placeholder="الجهاز المطلوب" value="{{ demande.appareil_demande }}" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="etat_demande">وضعية الطلب</label>
+            <select class="form-select text-center" required name="etat_demande">
+              {% for etat in etat_demande %}
+                <option value="{{ etat.0 }}" {% if etat.0 == demande.etat_demande %}selected{% endif %}>{{ etat.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="visite">الزيارة</label>
+            <select class="form-select text-center" name="visite">
+              <option value="{{ demande.visite.pk }}">{{ demande.visite.slug }}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="commentaire">ملاحظات</label>
+            <input type="text" class="form-control text-center" id="commentaire" name="commentaire" placeholder="ملاحظات" value="{{ demande.commentaire }}" />
+          </div>
+      </div>
+      <div class="card-footer col-12 text-center d-flex justify-content-between">
+        <div class="col-12">
+          <button class="btn btn-custom" type="submit"><i class="fas fa-save"></i> حفظ</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extrascripts %}
+<script>
+  $(document).ready(function() {
+      $('select#beneficiaire').select2();
+      var span=document.querySelector('.selection>span');
+      span.classList.add('form-control');
+  });
+</script>
+{% endblock %}
