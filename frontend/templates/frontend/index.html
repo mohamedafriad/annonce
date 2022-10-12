@@ -50,29 +50,29 @@
   </head>
   <body>
       <!-- Responsive navbar-->
-      <nav class="navbar navbar-expand-lg align-items-center navbar-expand-sm col-12">
+      <nav class="navbar navbar-expand-lg align-items-center navbar-expand-sm col-12 bg-light">
           <div class="container px-3">
-              <a class="navbar-brand" href="{% url 'front' %}"><img src="{% static 'frontend/img/annonce2.png' %}" width="150" height="50" alt="Annonces"/></a>
+              <a class="navbar-brand text-black" href="{% url 'front' %}">Nachra Annonces</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <!--<span class="navbar-toggler-icon">Menu</span>-->
                   <i class="fa-solid fa-list navbar-toggler-icon"></i> Menu
               </button>
               <div class="collapse navbar-collapse container-fluid justify-content-between" id="navbarSupportedContent" >
                   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                      <li class="nav-item px-2"><a class="nav-link active" aria-current="page" href="{% url 'front' %}">Accueil <i class="fa-solid fa-home"></i></a></li>
-                      <li class="nav-item px-2"><a class="nav-link active" aria-current="page" href="{% url 'liste_annonces' %}">Annonces publiées <i class="fa-solid fa-message"></i></a></li>
-                      <li class="nav-item px-2"><a class="nav-link active" aria-current="page" href="{% url 'nouvelle_annonce' %}">Publier une annonce <i class="fa-solid fa-plus"></i></a></li>
-                      <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contactez nous <i class="fa-solid fa-phone"></i></a></li>
+                      <li class="nav-item px-2"><a class="nav-link fs-6" aria-current="page" href="{% url 'front' %}">Accueil <i class="fa-solid fa-home"></i></a></li>
+                      <li class="nav-item px-2"><a class="nav-link  fs-6" aria-current="page" href="{% url 'liste_annonces' %}">Annonces publiées <i class="fa-solid fa-message"></i></a></li>
+                      <li class="nav-item px-2"><a class="nav-link  fs-6" aria-current="page" href="{% url 'nouvelle_annonce' %}">Publier une annonce <i class="fa-solid fa-plus"></i></a></li>
+                      <li class="nav-item"><a class="nav-link  fs-6" href="{% url 'contact' %}">Contactez nous <i class="fa-solid fa-phone"></i></a></li>
                   </ul>
                   <ul class="navbar-nav me-sm-0 mb-2 mb-lg-0">
                       {% if request.user.is_authenticated %}
                       <li class="nav-item d-flex justify-content-start rounded rounded-pill px-2">
-                        <a class="nav-link rounded rounded-pill" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample2" aria-controls="offcanvasExample" >
+                        <a class="nav-link rounded rounded-pill  fs-6" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample2" aria-controls="offcanvasExample" >
                           Menu <i class="fa-solid fa-list fa-xl"></i>
                         </a>
                       </li>
                       {% else%}
-                          <li class="nav-item justify-content-start px-2"><a class="nav-link" href="{% url 'b-login' %}">Connexion <i class="fa-solid fa-right-to-bracket"></i></a></li>
+                          <li class="nav-item justify-content-start px-2"><a class="nav-link  fs-6" href="{% url 'b-login' %}">Connexion <i class="fa-solid fa-right-to-bracket"></i></a></li>
                       {% endif %}
                   </ul>
               </div>

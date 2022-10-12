@@ -11300,6 +11300,7 @@ nav.navbar, footer {
 nav a {
     font-family: "Comfortaa";
     font-size: 1.3rem;
+    color : #D11250;
 }
 nav a:hover {
     color: white;
@@ -11312,7 +11313,7 @@ nav a.navbar-brand {
     display:none;
 }
 .navbar a, button.navbar-toggler {
-    color : white;
+    color : black;
 }
 p.alert-danger {
     background-color : #D11250;
