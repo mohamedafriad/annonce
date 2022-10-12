@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-gj%0p#x&9lnqtj!98@3591anp%&t#s2foxc(p(&eq5^^s54#ig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['annonce.pythonanywhere.com',]
 
 LOGOUT_REDIRECT_URL= '/'
 
@@ -51,11 +51,11 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',    
+    'django.contrib.staticfiles',
     'structure.apps.StructureConfig',
     'wkhtmltopdf',
     'frontend',
-    'qr_code',
+    #'qr_code',
     'corsheaders',
     'rest_framework',
 ]
