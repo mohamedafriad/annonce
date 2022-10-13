@@ -1,8 +1,9 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from annonces.CHOICES_LISTS import *
-from django.contrib.auth.models import Group, User
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 MILIEU_CHOIX=(
     (1, _('Urbain')),
@@ -122,20 +123,3 @@ class Centre(models.Model):
         verbose_name = _('Centre')
         verbose_name_plural = _('Centres')
 """
-
-
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
-class Membre(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    region = models.ForeignKey(Region, on_delete=models.SET_NULL, related_name="membres", null=True)
-    province = models.ForeignKey(Province, on_delete=models.SET_NULL, related_name="membres", null=True, blank=True)
-    #centre = models.ForeignKey(Centre, on_delete=models.SET_NULL, related_name="agents", null=True)
-
-    def __str__(self):
-        return self.user.username
-    
-    class Meta:
-        verbose_name = _("Membre")
-        verbose_name_plural = _("Membres")

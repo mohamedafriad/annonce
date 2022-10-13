@@ -1,8 +1,6 @@
 from django.contrib import admin
-from .models import Region, Province, Commune, Membre
+from .models import Region, Province, Commune
 from annonces.actions import export_as_xls
-from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
-from django.contrib.auth.models import Group
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
 
@@ -38,10 +36,3 @@ class CommuneAdmin(admin.ModelAdmin):
     search_fields = ('nom',)
 
 
-class GroupAdmin(BaseGroupAdmin):
-    save_as = True
-
-
-admin.site.unregister(Group)
-admin.site.register(Group, GroupAdmin)
-admin.site.register(Membre)

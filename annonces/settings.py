@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'structure.apps.StructureConfig',
     'wkhtmltopdf',
     'frontend',
+    'annonce',
     #'qr_code',
     'corsheaders',
     'rest_framework',
