@@ -10,6 +10,7 @@ from annonce.forms import EntrepriseForm, AnnonceForm
 from articles.models import Article
 
 def index(request):
+    request.session["page_active"]=1
     annonces = Annonce.objects.all()
     return render(request, template_name="frontend/index.html", context={'annonces':  annonces})
 	
@@ -27,15 +28,19 @@ def backlogin(request):
                 return redirect('tdb')
             else:
                 messages.add_message(request, messages.ERROR, "erreur d'authentification")
+                request.session["page_active"]=0
                 return redirect('b-login')
         else:
             messages.add_message(request, messages.ERROR, "erreur d'authentification")
+            request.session["page_active"]=0
             return redirect('b-login')
     else:
+        request.session["page_active"]=0
         return render(request, template_name="backend/login.html")
 
 def backlogout(request):
     logout(request)
+    request.session["page_active"]=1
     return redirect('front')
 
 
@@ -55,25 +60,31 @@ def contact(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             messages.add_message(request, messages.SUCCESS, "Message envoyé avec succès. Merci")
+            request.session["page_active"]=1
             return redirect('front')
         else:
             messages.add_message(request, messages.ERROR, "Une erreur est survenue ! veuillez réessayer. ")
+            request.session["page_active"]=4
             return redirect('contact')
     else:
+        request.session["page_active"]=4
         return render(request, template_name="frontend/contact.html")
 
     
 def liste_annonces(request):
+    request.session["page_active"]=2
     annonces = Annonce.objects.all()
     return render(request, template_name="frontend/liste_annonces.html", context={'annonces':  annonces})
 
 
 def actualite(request):
+    request.session["page_active"]=1
     articles = Article.objects.all()
     return render(request, template_name="frontend/actualite.html", context={'articles':  articles})
 
 
 def annuaire(request):
+    request.session["page_active"]=3
     entreprises = Entreprise.objects.all()
     return render(request, template_name="frontend/annuaire.html", context={'entreprises':  entreprises})
 

@@ -12,14 +12,14 @@
 {% block content %}
 {% for entreprise in entreprises %}
 <div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg align-items-center justify-content-center">
-    <div class="col-md-4">
+    <div class="col-lg-4 col-sm-6" >
         {% if entreprise.logo %}
         <img src="{{ entreprise.logo }}" class="img w-100 h-100 rounded-2" />
         {% else %}
         <img src="{% static 'frontend/img/no-photo.png' %}" class="img w-100 h-100 rounded-2" />
         {% endif %}
     </div>
-    <div class="col-md-8 h-50">
+    <div class="col-lg-8 col-sm-6 h-50">
         <div class="p-1">
         <h2 class="card-title fs-2">{{ entreprise.raison_soc }} <span class="end-0 badge bg-primary text-white fs-6">{{ entreprise.get_forme_display }}</span></h2>
         <p class="card-text"><i class="fas fa-address-card"></i> ICE: {{ entreprise.ice }}</p>
@@ -28,6 +28,7 @@
         <p class="card-text"><i class="fas fa-fax"></i> {{ entreprise.fax }}</p>
         <p class="card-text"><i class="fas fa-at"></i> {{ entreprise.email }}</p>
       </div>
+    </div>
 </div>
 {% endfor %}
 {% endblock %}

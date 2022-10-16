@@ -49,10 +49,10 @@
 </div>{% endcomment %}
 {% for annonce in annonces %}
 <div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
-    <div class="col-md-2 justify-content-center align-items-center">
+    <div class="col-lg-2 d-none d-lg-block justify-content-center align-items-center">
         <i class="fa fa-bullhorn fs-4 w-100 h-50 rounded-2 text-center"></i>
     </div>
-    <div class="col-md-10 h-50">
+    <div class="col-lg-10 col-md-12 h-50">
         <div class="p-1">
         <h2 class="card-title fs-2">{{ annonce.intitule }} <span class="end-0 badge bg-danger text-white fs-6">Référence: {{ annonce.reference }}</span></h2>
         <p class="card-text">{{ annonce.contenu }}</p>
@@ -64,8 +64,12 @@
 {% endfor %}
 {% endblock %}
 {% block extrafooter %}
-    <a class="text-white rounded-sm start-0  fixed-bottom p-1 w-0 btn btn-custom" href="{% url 'nouvelle_annonce' %}">
+<footer class="mt-5">
+    <div class="d-flex justify-content-center align-items-center">
+    <a class="text-white rounded-sm start-0 end-0 fixed-bottom py-1  px-2 w-25 mx-1 btn btn-custom" href="{% url 'nouvelle_annonce' %}">
         <i class="fas fa-file-circle-plus"></i> Nouvelle Annonce</a>
+    </div>
+</footer>
 {% endblock %}
 {% block extrascripts %}
 {% endblock %}
