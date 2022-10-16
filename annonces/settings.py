@@ -44,7 +44,9 @@ MENU_WEIGHT = {
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
+    #'grappelli',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -56,6 +58,7 @@ INSTALLED_APPS = [
     'wkhtmltopdf',
     'frontend',
     'annonce',
+    'articles',
     #'qr_code',
     'corsheaders',
     'rest_framework',
@@ -161,3 +164,7 @@ GRAPPELLI_ADMIN_TITLE =_('Administration annonce')
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

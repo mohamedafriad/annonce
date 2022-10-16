@@ -1,5 +1,5 @@
 {% extends "frontend/index.html" %}
-{% load static %}{% load i18n grp_tags %}
+{% load static %}{% load i18n %}
 {% block title %}Connexion{% endblock %}
 {% block extrahead %}
 {% endblock %}
@@ -28,11 +28,10 @@
               <input type="password" class="form-control" name="password" required placeholder="Ici vote mot de passe" />
             </div>
         </div>
-        <div class="card-footer col-12 text-center">
-          <div class="col-12">
+        <div class="card-footer col-12 d-flex justify-content-around">
             <button type="submit" class="btn btn-primary" href="{% url 'b-login' %}"><i class="fas fa-right-to-bracket"></i> Se connecter</button>
+            <a class="btn btn-custom text-white" href="{% url 'b-login' %}"><i class="fas fa-user-plus"></i> S'inscrire</a>
             </form>
-          </div>
         </div>
       </div>
     </div>

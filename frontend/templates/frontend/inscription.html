@@ -1,0 +1,44 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block extrahead %}
+<style>
+.scrollview {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="row gx-4 gx-lg-5 align-items-center my-2">
+  <div class="col-sm-12">
+    <div class="card h-100">
+      <div class="card-header text-center">
+        <h4 class="font-weight-light">Inscription</h4>
+        <p>{{ form.errors }}</p>
+      </div>
+      <div class="card-body col-sm-12">
+        <form class="row g-3" action="" method="post">{% csrf_token %}
+          
+          
+      </div>
+      
+      <div class="card-footer col-12 text-center d-flex justify-content-between">
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Publier</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extrascripts %}
+<script>
+  $(document).ready(function() {
+      $('select#beneficiaire').select2();
+      var span=document.querySelector('.selection>span');
+      span.classList.add('form-control');
+  });
+</script>
+{% endblock %}

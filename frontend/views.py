@@ -5,9 +5,13 @@ from django.contrib import messages
 from django.http import HttpResponseBadRequest, JsonResponse
 from structure.models import Province, Region, Commune
 from .forms import LoginForm, ContactForm
+from annonce.models import Entreprise, Annonce, Profil
+from annonce.forms import EntrepriseForm, AnnonceForm
+from articles.models import Article
 
 def index(request):
-	return render(request, template_name="frontend/index.html")
+    annonces = Annonce.objects.all()
+    return render(request, template_name="frontend/index.html", context={'annonces':  annonces})
 	
 # TODO : eliminer la varible de session is_authenticated -> request.user.is_authenticated
 def backlogin(request):
@@ -35,6 +39,14 @@ def backlogout(request):
     return redirect('front')
 
 
+def inscription(request):
+    if request.method == "POST":
+        return render(request, template_name="frontend/profil.html")
+    else:
+        form = EntrepriseForm()
+        return render(request, template_name="frontend/inscription.html", context={"form": form})
+
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -49,21 +61,45 @@ def contact(request):
             return redirect('contact')
     else:
         return render(request, template_name="frontend/contact.html")
+
     
 def liste_annonces(request):
-	return render(request, template_name="frontend/liste_annonces.html", context={'range':  range(20)})
+    annonces = Annonce.objects.all()
+    return render(request, template_name="frontend/liste_annonces.html", context={'annonces':  annonces})
+
+
+def actualite(request):
+    articles = Article.objects.all()
+    return render(request, template_name="frontend/actualite.html", context={'articles':  articles})
+
+
+def annuaire(request):
+    entreprises = Entreprise.objects.all()
+    return render(request, template_name="frontend/annuaire.html", context={'entreprises':  entreprises})
+
+
+def user_annonces(request):
+    if request.user.is_authenticated:
+        annonces = request.user.profil.annonces.all()
+        return render(request, template_name="frontend/mes_annonces.html", context={'annonces':  annonces})
+    else:
+        return redirect('b-login')
+
 
 def nouvelle_annonce(request): 
     if request.user.is_authenticated:
-        return render(request, template_name="frontend/nouvelle_annonce.html")
+        form = AnnonceForm()
+        return render(request, template_name="frontend/nouvelle_annonce.html", context = {"form": form})
     else:
         return redirect('b-login')
+
 
 def tdb(request):
     if request.user.is_authenticated:
         return render(request, template_name="frontend/tdb.html")
     else:
         return redirect('b-login')
+
     
 def packs(request):
     if request.user.is_authenticated:

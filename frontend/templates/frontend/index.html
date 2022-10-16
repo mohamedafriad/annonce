@@ -1,4 +1,4 @@
-{% load static %}{% load i18n %}
+{% load static %}{% load i18n %}{% load crispy_forms_tags %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ "fr" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
@@ -50,25 +50,26 @@
   </head>
   <body>
       <!-- Responsive navbar-->
-      <nav class="navbar navbar-expand-lg align-items-center navbar-expand-sm col-12 bg-light fixed-top">
+      <nav class="navbar navbar-expand-lg align-items-center navbar-expand-md col-12 bg-light fixed-top">
           <div class="container px-3">
-              <a class="navbar-brand text-black fs-6" href="{% url 'front' %}"><i class="fas fa-bullhorn"></i> Nachra Annonces</a>
+              <a class="navbar-brand text-black fs-6"  id="navbar-logo" href="{% url 'front' %}"><i class="fas fa-bullhorn"></i> Nachra Annonces</a>
               <button class="navbar-toggler fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <!--<span class="navbar-toggler-icon">Menu</span>-->
                   <i class="fas fa-ellipsis navbar-toggler-icon"></i> 
               </button>
-              <div class="collapse navbar-collapse container-fluid justify-content-between" id="navbarSupportedContent" >
+              <div class="collapse navbar-collapse container-fluid justify-content-center" id="navbarSupportedContent" >
                   <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                      <li class="nav-item px-2"><a class="nav-link fs-6" aria-current="page" href="{% url 'front' %}">Accueil <i class="fa-solid fa-home"></i></a></li>
-                      <li class="nav-item px-2"><a class="nav-link  fs-6" aria-current="page" href="{% url 'liste_annonces' %}">Annonces publiées <i class="fa-solid fa-bullhorn"></i></a></li>
-                      <li class="nav-item px-2"><a class="nav-link  fs-6" aria-current="page" href="{% url 'nouvelle_annonce' %}">Publier une annonce <i class="fa-solid fa-file-circle-plus"></i></a></li>
-                      <li class="nav-item px-2"><a class="nav-link  fs-6" href="{% url 'contact' %}">Contactez nous <i class="fa-solid fa-phone"></i></a></li>
+                      <li class="nav-item px-2"><a class="nav-link fs-6" aria-current="page" href="{% url 'actualite' %}"><i class="far fa-newspaper"></i> Actualité</a></li>
+                      <li class="nav-item px-2 d-sm-block"><a class="nav-link fs-6" aria-current="page" href="{% url 'liste_annonces' %}"><i class="fa-solid fa-bullhorn"></i> Annonces</a></li>
+                      <li class="nav-item px-2 d-md-none d-sm-block"><a class="nav-link fs-6" aria-current="page" href="{% url 'nouvelle_annonce' %}"><i class="fa-solid fa-file-circle-plus"></i> Nouvelle Annonce</a></li>
+                      <li class="nav-item px-2"><a class="nav-link fs-6" aria-current="page" href="{% url 'annuaire' %}"><i class="fa-solid fa-address-card"></i> Annuaire</a></li>
+                      <li class="nav-item px-2"><a class="nav-link fs-6" aria-current="page" href="{% url 'contact' %}"><i class="fa-solid fa-phone"></i> Contact</a></li>
                   </ul>
                   <ul class="navbar-nav me-sm-0 mb-2 mb-lg-0">
                       {% if request.user.is_authenticated %}
                       <li class="nav-item d-flex justify-content-start rounded rounded-pill px-2">
                         <a class="nav-link rounded rounded-pill  fs-6" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample2" aria-controls="offcanvasExample" >
-                          Menu <i class="fa-solid fa-ellipsis fa-sm"></i>
+                          <i class="fa-solid fa-ellipsis fa-sm"></i> Menu
                         </a>
                       </li>
                       {% else%}
@@ -79,7 +80,7 @@
           </div>
       </nav>
       <!-- Page Content-->
-      <div class="container px-4 px-lg-5 mb-5">
+      <div class="container px-4 px-lg-5 pt-5">
           {% if request.user.is_authenticated %}
           <!-- BARRE LATERALE  -->
           <div class="offcanvas offcanvas-end d-flex flex-column flex-shrink-0 p-3 text-white" tabindex="-1" style="width: 280px;" id="offcanvasExample2" aria-labelledby="offcanvasExampleLabel">
@@ -88,37 +89,32 @@
               </a>
               <hr>
               <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-user"></i> Mon Profil</a>
+                </li>
                 <li>
                   <a class="nav-link"  href="{% url 'tdb' %}"><i class="fas fa-gears"></i> Tableau de bord</a>
                 </li>
                 <li>
-                  <a class="nav-link" href="#"><i class="fas fa-search"></i> Lien 2</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#"><i class="fas fa-user-plus"></i> Lien 3</a>
+                  <a class="nav-link" href="{% url 'mes_annonces' %}"><i class="fas fa-bullhorn"></i> Mes annonces</a>
                 </li>
                 <li>
-                  <a class="nav-link"  href="#"><i class="fas fa-person-chalkboard"></i> Lien 4</a>
+                  <a class="nav-link"  href="{% url 'nouvelle_annonce' %}"><i class="fas fa-file-circle-plus"></i> Publier une annonce</a>
                 </li>
                 <li>
                   <a class="nav-link"  href="#"><i class="fas fa-list"></i> Lien 5</a>
                 </li>
-                
               </ul>
               <hr>
               <a class="nav-link text-center" href="{% url 'b-logout' %}"><i class="fas fa-person-running"></i> Déconnexion</a>
           </div>
           {% endif %}
       {% block content %}
-          <div class="row gx-4 gx-md-2 gy-md-2 gy-sm-2 align-items-center my-2 justify-content-between">
-
-          </div>
       {% endblock %}
       </div>
-      <!-- Footer-->
-      <footer class="py-2 fixed-bottom bg-light text-dark">
-          <div class="container px-4 px-lg-5  "><p class="m-0 text-center">Copyright 2022 &copy; </p></div>
-      </footer>
+      <!-- Footer -->
+        {% block extrafooter %}
+        {% endblock %}
       <script src="{% static 'frontend/js/bootstrap.min.js'%}"></script>
       <script src="{% static 'frontend/js/scripts.js'%}"></script>
       <script src="{% static 'frontend/js/fontawesome.min.js'%}"></script>

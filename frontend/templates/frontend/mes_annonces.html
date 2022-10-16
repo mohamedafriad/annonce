@@ -31,7 +31,7 @@
         </div>
     </form>
 </div>
-{% comment %}<div class="row my-4 justify-content-around">
+<div class="row my-4 justify-content-around">
     {% for annonce in annonces %}
     <div class="card col-md-3 col-sm-12 mx-1 px-0 shadow-sm my-2">
         <div class="card-header col-12   text-center bg-light text-dark">
@@ -46,26 +46,7 @@
         </div>
     </div>
     {% endfor %}
-</div>{% endcomment %}
-{% for annonce in annonces %}
-<div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
-    <div class="col-md-2 justify-content-center align-items-center">
-        <i class="fa fa-bullhorn fs-4 w-100 h-50 rounded-2 text-center"></i>
-    </div>
-    <div class="col-md-10 h-50">
-        <div class="p-1">
-        <h2 class="card-title fs-2">{{ annonce.intitule }} <span class="end-0 badge bg-danger text-white fs-6">Référence: {{ annonce.reference }}</span></h2>
-        <p class="card-text">{{ annonce.contenu }}</p>
-        <p class="card-text"><small class="text-muted"> Par {{ annonce.annonceur }} Le {{ annonce.date_creation}} - pour {{ annonce.annonceur.entreprise }}</small></p>
-        <a class="btn btn-custom text-white end-0" href="{{ annonce.url }}" target="_blank">Détails</a>
-        </div>
-      </div>
 </div>
-{% endfor %}
-{% endblock %}
-{% block extrafooter %}
-    <a class="text-white rounded-sm start-0  fixed-bottom p-1 w-0 btn btn-custom" href="{% url 'nouvelle_annonce' %}">
-        <i class="fas fa-file-circle-plus"></i> Nouvelle Annonce</a>
 {% endblock %}
 {% block extrascripts %}
 {% endblock %}

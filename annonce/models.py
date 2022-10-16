@@ -83,7 +83,7 @@ CATEGORIE_ANNONCE=(
 )
 
 class Annonce(models.Model):
-    reference = models.CharField("Référence", max_length=200)
+    reference = models.CharField("Référence", max_length=200, blank=True)
     intitule = models.CharField("Intitule", max_length=250)
     date_creation = models.DateTimeField("Date création", auto_now=False, auto_now_add=True)
     date_publication = models.DateField("Date publication", auto_now=False, auto_now_add=False, null=True, blank=True)

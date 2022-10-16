@@ -1,0 +1,37 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block extrahead %}
+<style>
+    .scrollview {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+</style>
+{% endblock %}
+{% block content %}
+{% for article in articles %}
+<div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
+    <div class="col-md-4">
+        <img src="{{ article.image }}" class="img w-100 h-100 rounded-2" />
+    </div>
+    <div class="col-md-8 h-50">
+        <div class="p-1">
+        <h2 class="card-title fs-2">{{ article.titre }} <span class="end-0 badge bg-primary text-white fs-6">Nouveau</span></h2>
+        <p class="card-text">{{ article.contenu }}</p>
+        <p class="card-text"><small class="text-muted"> Par {{ article.auteur }} Le {{ article.date_creation}} - pour {{ article.journal }}</small></p>
+        <a class="btn btn-custom text-white end-0" href="{{ article.url }}" target="_blank">Lire</a>
+        </div>
+      </div>
+</div>
+{% endfor %}
+{% endblock %}
+{% block extrafooter %}
+<footer class="row-fluid pt-5 bg-light">
+    <a class="text-white rounded-sm start-0  fixed-bottom p-1 w-0" href="#">
+        <i class="fas fa-arrow-up fs-2 text-danger"></i>
+    </a>
+</footer>
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}
