@@ -18,3 +18,18 @@ class Article(models.Model):
 	class Meta:
 		verbose_name ="Article"
 		verbose_name_plural = "Articles"
+
+
+class Commentaire(models.Model):
+	auteur = models.CharField("Auteur", max_length=250, blank=True)
+	article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Article", related_name="commentaires")
+	date_creation = models.DateField(auto_now_add=True, verbose_name="Date création")
+	contenu = models.CharField("Contenu", max_length=700)
+	note = models.PositiveSmallIntegerField("Note", null=True, blank= True)
+
+	def __str__(self):
+		return "commentaire n° %s" %(str(self.pk))
+
+	class Meta:
+		verbose_name = "Commentaire"
+		verbose_name_plural = "Commentaires"

@@ -34,15 +34,15 @@
           <form class="row g-3" action="" method="POST">{% csrf_token %}
             <div class="col-md-12">
               <label class="form-label" for="nom">Nom</label>
-              <input type="text" class="form-control" name="nom" placeholder="Votre nom ici ..." required/>
+              <input type="text" class="form-control" name="nom" placeholder="Votre nom ici ..." required {% if form.errors %} value="{{ form.nom.value }}"{% endif %}/>
             </div>
             <div class="col-md-12">
               <label class="form-label" for="email">Email</label>
-              <input type="email" class="form-control" name="email" placeholder="Votre email ici ..." required/>
+              <input type="email" class="form-control" name="email" placeholder="Votre email ici ..." required {% if form.errors %} value="{{ form.email.value }}"{% endif %}/>
             </div>
             <div class="col-md-12">
               <label class="form-label" for="message">Message</label>
-              <textarea class="form-control" name="message" placeholder="Votre message ici ..." required></textarea>
+              <textarea class="form-control" name="message" placeholder="Votre message ici ..." required {% if form.errors %} value="{{ form.message.value }}"{% endif %}></textarea>
             </div>
         </div>
         <div class="card-footer col-sm-12 text-center">

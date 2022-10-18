@@ -8,6 +8,7 @@ from .forms import LoginForm, ContactForm
 from annonce.models import Entreprise, Annonce, Profil
 from annonce.forms import EntrepriseForm, AnnonceForm
 from articles.models import Article
+from articles.forms import CommentaireForm
 
 def index(request):
     request.session["page_active"]=1
@@ -52,25 +53,31 @@ def inscription(request):
         return render(request, template_name="frontend/inscription.html", context={"form": form})
 
 
+def profil(request):
+    if request.method == "POST":
+        return render(request, template_name="frontend/profil.html")
+    else:
+        form = EntrepriseForm()
+        return render(request, template_name="frontend/profil.html", context={"form": form})
+
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            nom = form.cleaned_data['nom']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
+            form.save()
             messages.add_message(request, messages.SUCCESS, "Message envoyé avec succès. Merci")
             request.session["page_active"]=1
             return redirect('front')
         else:
             messages.add_message(request, messages.ERROR, "Une erreur est survenue ! veuillez réessayer. ")
             request.session["page_active"]=4
-            return redirect('contact')
+            return render(request, template_name="frontend/contact.html", context = {'form': form})
     else:
         request.session["page_active"]=4
         return render(request, template_name="frontend/contact.html")
 
-    
+
 def liste_annonces(request):
     request.session["page_active"]=2
     annonces = Annonce.objects.all()
@@ -83,6 +90,22 @@ def actualite(request):
     return render(request, template_name="frontend/actualite.html", context={'articles':  articles})
 
 
+def article(request, pk=0):
+    request.session["page_active"]=1
+    article = Article.objects.get(pk=pk)
+    return render(request, template_name="frontend/article.html", context={'article':  article})
+
+def commenter(request, pk=0):
+    if request.method == "POST":
+        form = CommentaireForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect('article', pk=pk)
+        else :
+            pass
+    else:
+        form = CommentaireForm()
+        return render(request, template_name="frontend/commentaire.html", context = {"form": form})
 def annuaire(request):
     request.session["page_active"]=3
     entreprises = Entreprise.objects.all()

@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'frontend',
     'annonce',
     'articles',
-    #'qr_code',
+    'qr_code',
     'corsheaders',
     'rest_framework',
 ]

@@ -33,11 +33,15 @@ urlpatterns = [
     path('backend/logout/', front_views.backlogout, name="b-logout"),   # deconnexion
     path('contact/', front_views.contact, name="contact"),   # contact
     path('actualite/', front_views.actualite, name="actualite"),   # actualite
+    path('actualite/article/<pk>/', front_views.article, name="article"),   # article
+    path('actualite/article/<pk>/commenter/', front_views.commenter, name="commenter"),   # commenter
     path('annuaire/', front_views.annuaire, name="annuaire"),   # actualite
     path('tdb/', front_views.tdb, name="tdb"),   # tdb
-    path('annonces/user/', front_views.user_annonces, name="mes_annonces"),   # mes annonces
+    path('profil/', front_views.profil, name="profil"),   # tdb
     path('packs/', front_views.packs, name="packs"),   # tdb
     path('annonces/', front_views.liste_annonces, name="liste_annonces"),   # liste annonces
-    path('annonce/nouvelle/', front_views.nouvelle_annonce, name="nouvelle_annonce"),   # nouvelle annonce
+    path('annonce/nouvelle/', front_views.nouvelle_annonce, name="nouvelle_annonce"),   # nouvelle annonce    
+    path('annonces/user/', front_views.user_annonces, name="mes_annonces"),   # mes annonces
+
 
 ]

@@ -1,6 +1,6 @@
 {% extends "frontend/index.html" %}
 {% load static %}{% load l10n %}{% load crispy_forms_tags %}
-{% block title %}Nouvelle Annonce{% endblock %}
+{% block title %}Nouveau Commentaire{% endblock %}
 {% block extrahead %}
 <style>
 .scrollview {
@@ -12,9 +12,9 @@
 {% endblock %}
 {% block content %}
 <div class="row gx-4 gx-lg-5 align-items-center my-2 pt-4">
-  <form class="row g-3" action="" method="post">{% csrf_token %}
+  <form class="row g-3  justify-content-center" action="" method="post">{% csrf_token %}
     {{ form|crispy }}
-    <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> Publier</button>
+    <button class="btn btn-custom col-4 rounded rounded-pill" type="submit"><i class="fas fa-save"></i> Publier</button>
   </form>
 
   <!--<div class="col-sm-12">
