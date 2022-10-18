@@ -144,11 +144,6 @@
       <script src="{% static 'frontend/js/fontawesome.min.js'%}"></script>
       <script src="{% static 'frontend/js/jquery-3.6.0.min.js'%}"></script>
       {% block extrascripts %}
-      <script type="text/javascript">
-          {% for message in messages %}
-            alert("{{message}}");
-          {% endfor %}
-      </script>
       {% endblock %}
   </body>
 </html>

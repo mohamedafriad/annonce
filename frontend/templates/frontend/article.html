@@ -9,6 +9,7 @@
         white-space: nowrap;
     }
 </style>
+<link rel="stylesheet" type="text/css" href="{% static 'articles/css/star-rating-svg.css' %}">
 {% endblock %}
 {% block content %}
 <div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
@@ -35,6 +36,7 @@
         <div class="p-1">
         <h4 class="card-title fs-4">{{ commentaire.contenu }}</h4>
         <p class="card-text"><small class="text-muted"> Par {{ commentaire.auteur }}  - Le {{ commentaire.date_creation}}</small></p>
+        <p class="card-text rating" data-rating="{{ commentaire.note }}"></p>
         </div>
       </div>
 </div>
@@ -48,4 +50,17 @@
 </footer>
 {% endblock %}
 {% block extrascripts %}
+<script src="{% static 'articles/js/jquery.star-rating-svg.js' %}"></script>
+<script type="text/javascript">
+    $(".rating").starRating({
+      totalStars: 5,
+      starShape: 'rounded',
+      starSize: 40,
+      emptyColor: 'lightgray',
+      hoverColor: 'salmon',
+      activeColor: 'crimson',
+      useGradient: false,
+      readOnly: true
+    });
+</script>
 {% endblock %}

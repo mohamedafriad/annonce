@@ -24,7 +24,7 @@
         <div class="d-flex justify-content-around">
         <a class="btn btn-custom text-white rounded rounded-pill" href="{% url 'article' pk=article.pk %}" >
             <i class="fas fa-eye"></i> Consulter</a>
-        <a class="btn btn-danger disabled text-white rounded rounded-pill" href="{{ article.url }}" target="_blank">
+        <a class="btn btn-danger text-white rounded rounded-pill" href="{% url 'commenter' pk=article.pk %}">
             <i class="fas fa-pen"></i> Commenter</a>
         </div>
         </div>

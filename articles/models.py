@@ -20,12 +20,19 @@ class Article(models.Model):
 		verbose_name_plural = "Articles"
 
 
+NOTE_ARTICLE = (
+	(1, 1),
+	(2, 2),
+	(3, 3),
+	(4, 4),
+	(5, 5),
+)
 class Commentaire(models.Model):
 	auteur = models.CharField("Auteur", max_length=250, blank=True)
-	article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Article", related_name="commentaires")
+	article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Article", related_name="commentaires", null=True, blank=True)
 	date_creation = models.DateField(auto_now_add=True, verbose_name="Date création")
 	contenu = models.CharField("Contenu", max_length=700)
-	note = models.PositiveSmallIntegerField("Note", null=True, blank= True)
+	note = models.PositiveSmallIntegerField("Note", null=True, blank= True, choices=NOTE_ARTICLE, default=1)
 
 	def __str__(self):
 		return "commentaire n° %s" %(str(self.pk))

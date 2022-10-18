@@ -8,14 +8,9 @@ from .forms import LoginForm, ContactForm
 from annonce.models import Entreprise, Annonce, Profil
 from annonce.forms import EntrepriseForm, AnnonceForm
 from articles.models import Article
-from articles.forms import CommentaireForm
+from articles.forms import CommentaireForm	
 
-def index(request):
-    request.session["page_active"]=1
-    annonces = Annonce.objects.all()
-    return render(request, template_name="frontend/index.html", context={'annonces':  annonces})
-	
-# TODO : eliminer la varible de session is_authenticated -> request.user.is_authenticated
+# view de connexion : OK
 def backlogin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -23,26 +18,65 @@ def backlogin(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
-            if user is not None:
+            if user is not None: #utilisateur existe
                 login(request, user)
-                #request.session['is_authenticated'] = True
-                return redirect('tdb')
-            else:
+                return redirect('tdb') # redirection vers le tableau de bord
+            else:  # # identifiants erronés : utilisateur n'existe pas
                 messages.add_message(request, messages.ERROR, "erreur d'authentification")
-                request.session["page_active"]=0
+                request.session["page_active"]=0 # page de connexion active
                 return redirect('b-login')
-        else:
+        else:  # formulaire non valide
             messages.add_message(request, messages.ERROR, "erreur d'authentification")
-            request.session["page_active"]=0
-            return redirect('b-login')
-    else:
-        request.session["page_active"]=0
+            request.session["page_active"]=0 # page de connexion active
+            return redirect('b-login') 
+    else: # method GET
+        request.session["page_active"]=0 # page de connexion active
         return render(request, template_name="backend/login.html")
 
+# view de deconnexion : OK
 def backlogout(request):
     logout(request)
+    request.session["page_active"]=1 # page d'accueil active
+    return redirect('front') # redirection vers page accueil
+
+
+# view d'accueil : OK
+def index(request):
     request.session["page_active"]=1
-    return redirect('front')
+    annonces = Annonce.objects.filter(etat = 2)
+    return render(request, template_name="frontend/index.html", context={'annonces':  annonces})
+
+
+# view de la page d'actualite
+def actualite(request):
+    request.session["page_active"]=1  # page d'actualite active
+    articles = Article.objects.all()
+    return render(request, template_name="frontend/actualite.html", context={'articles':  articles})
+
+
+# page détails article
+def article(request, pk=0):
+    request.session["page_active"]=1  # page d'actualite active
+    article = Article.objects.get(pk=pk)
+    return render(request, template_name="frontend/article.html", context={'article':  article})
+
+
+# commenter un article
+def commenter(request, pk=0):
+    if request.method == "POST":
+        form = CommentaireForm(request.POST)
+        article = Article.objects.get(pk=pk)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.article = article
+            instance.save()
+            return redirect('article', pk=pk)
+        else :
+            pass
+    else:
+        form = CommentaireForm()
+        return render(request, template_name="frontend/commentaire.html", context = {"form": form})
+
 
 
 def inscription(request):
@@ -80,32 +114,11 @@ def contact(request):
 
 def liste_annonces(request):
     request.session["page_active"]=2
-    annonces = Annonce.objects.all()
+    annonces = Annonce.objects.filter(etat=2)
     return render(request, template_name="frontend/liste_annonces.html", context={'annonces':  annonces})
 
 
-def actualite(request):
-    request.session["page_active"]=1
-    articles = Article.objects.all()
-    return render(request, template_name="frontend/actualite.html", context={'articles':  articles})
 
-
-def article(request, pk=0):
-    request.session["page_active"]=1
-    article = Article.objects.get(pk=pk)
-    return render(request, template_name="frontend/article.html", context={'article':  article})
-
-def commenter(request, pk=0):
-    if request.method == "POST":
-        form = CommentaireForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('article', pk=pk)
-        else :
-            pass
-    else:
-        form = CommentaireForm()
-        return render(request, template_name="frontend/commentaire.html", context = {"form": form})
 def annuaire(request):
     request.session["page_active"]=3
     entreprises = Entreprise.objects.all()
