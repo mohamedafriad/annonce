@@ -78,6 +78,24 @@ def commenter(request, pk=0):
         return render(request, template_name="frontend/commentaire.html", context = {"form": form})
 
 
+# page liste des annonces publiées
+def liste_annonces(request):
+    request.session["page_active"]=2
+    annonces = Annonce.objects.filter(etat=2)
+    reference = request.GET.get('reference', None)
+    if reference:
+        annonces = annonces.filter(reference=reference)
+    date_creation = request.GET.get('date_creation', None)
+    print(date_creation)
+    print(annonces)
+    if date_creation:
+        annonces = annonces.filter(date_creation__date=date_creation)
+    print(annonces)
+    type_annonce = int(request.GET.get('type_annonce', 0))
+    if int(type_annonce) > 0:
+        annonces = annonces.filter(type_annonce=type_annonce)
+    return render(request, template_name="frontend/liste_annonces.html", context={'annonces':  annonces})
+
 
 def inscription(request):
     if request.method == "POST":
@@ -110,12 +128,6 @@ def contact(request):
     else:
         request.session["page_active"]=4
         return render(request, template_name="frontend/contact.html")
-
-
-def liste_annonces(request):
-    request.session["page_active"]=2
-    annonces = Annonce.objects.filter(etat=2)
-    return render(request, template_name="frontend/liste_annonces.html", context={'annonces':  annonces})
 
 
 
