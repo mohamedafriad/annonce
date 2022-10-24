@@ -14,17 +14,17 @@
 <div class="pt-3">
     <form class="form row my-1 d-flex justify-content-between align-items-around" method="get">
         <div class="col-md-4 col-sm-12 py-2">
-            <input class="form-control" type="text" name="reference" placeholder="référence annonce ici" id="reference" />
+            <input class="form-control" type="text" name="reference" placeholder="référence annonce ici" id="reference" {% if reference %}value="{{ reference }}"{% endif %}/>
         </div>
         <div class="col-md-4 col-sm-12 py-2">
-            <input class="form-control" type="date" name="date_creation" placeholder="date annonce ici" id="date_creation" />
+            <input class="form-control" type="date" name="date_creation" placeholder="date annonce ici" id="date_creation" {% if date_creation %}value="{{ date_creation }}"{% endif %} />
         </div>
         <div class="col-md-3 col-sm-12 py-2">
             <select class="form-select text-center" name="type_annonce" id="type" placeholder="Type annonce">
                 <option value="0">Toutes les annonces</option>
-                <option value="1">Création</option>
-                <option value="2">Modification</option>
-                <option value="3">Autre</option>
+                {% for categorie in categories %}
+                <option value="{{ categorie.0 }}" {% if type_annonce == categorie.0 %}selected{% endif %} >{{ categorie.1 }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="col-md-1 col-sm-12 text-center py-2">

@@ -11,7 +11,7 @@
 </style>
 {% endblock %}
 {% block content %}
-<div class="row gx-4 gx-lg-5 align-items-center justify-content-center pt-3">
+<div class="row gx-4 gx-lg-5 align-items-center justify-content-center pt-5">
     <div class="card text-center col-sm-12 col-md-6 shadow-lg px-0" >
       <div class="card-header text-center col-md-12 bg-info">
         <h4 class="col-md-12 text-white px-0"><i class="fa fa-vault"></i> Mon Solde</h4>
@@ -32,7 +32,7 @@
       <h4 class="col-md-12 text-white px-0"><i class="fa-solid fa-bullhorn"></i> Total Annonces</h4>
     </div>
     <div class="card-body">
-      <h1 class="card-title">1</h1>
+      <h1 class="card-title" id="0101"></h1>
     </div>
   </div>
   <div class="card text-center col-sm-12 col-md-3 shadow-lg px-0" >
@@ -40,7 +40,7 @@
       <h4 class="col-md-12 text-white px-0"><i class="fa fa-thumbs-up"></i> Publiées</h4>
     </div>
     <div class="card-body">
-      <h1 class="card-title">1</h1>
+      <h1 class="card-title" id="0102"></h1>
     </div>
   </div>
   <div class="card text-center col-sm-12 col-md-3 shadow-lg px-0" >
@@ -48,8 +48,50 @@
       <h4 class="col-md-12 text-white px-0"><i class="fa fa-hourglass-start"></i> En attente</h4>
     </div>
     <div class="card-body">
-      <h1 class="card-title">0</h1>
+      <h1 class="card-title" id="0103"></h1>
     </div>
   </div>
 </div>
+{% endblock %}
+{% block extrascripts %}
+<script>
+      function animate(obj, initVal, lastVal, duration) {
+         let startTime = null;
+
+      //get the current timestamp and assign it to the currentTime variable
+      let currentTime = Date.now();
+
+      //pass the current timestamp to the step function
+      const step = (currentTime ) => {
+
+      //if the start time is null, assign the current time to startTime
+      if (!startTime) {
+         startTime = currentTime ;
+      }
+
+      //calculate the value to be used in calculating the number to be displayed
+      const progress = Math.min((currentTime - startTime)/ duration, 1);
+
+      //calculate what to be displayed using the value gotten above
+      obj.innerHTML = Math.floor(progress * (lastVal - initVal) + initVal);
+
+      //checking to make sure the counter does not exceed the last value (lastVal)
+      if (progress < 1) {
+         window.requestAnimationFrame(step);
+      } else {
+            window.cancelAnimationFrame(window.requestAnimationFrame(step));
+         }
+      };
+      //start animating
+         window.requestAnimationFrame(step);
+      }
+      let text1 = document.getElementById('0101');
+      let text2 = document.getElementById('0102');
+      let text3 = document.getElementById('0103');
+      const load = () => {
+         animate(text1, 50, {{ total }}, 7000);
+         animate(text2, 50, {{ publiees }}, 7000);
+         animate(text3, 50, {{ attente }}, 7000);
+      }
+   </script>
 {% endblock %}

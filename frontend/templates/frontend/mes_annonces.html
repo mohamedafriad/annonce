@@ -1,6 +1,6 @@
 {% extends "frontend/index.html" %}
-{% load static %}{% load l10n %}
-{% block title %}Mes Annonces{% endblock %}
+{% load static %}{% load l10n %}{% load qr_code %}
+{% block title %}Toutes les annonces{% endblock %}
 {% block extrahead %}
 <style>
     .scrollview {
@@ -14,17 +14,17 @@
 <div class="pt-3">
     <form class="form row my-1 d-flex justify-content-between align-items-around" method="get">
         <div class="col-md-4 col-sm-12 py-2">
-            <input class="form-control" type="text" name="reference" placeholder="référence annonce ici" id="reference" />
+            <input class="form-control" type="text" name="reference" placeholder="référence annonce ici" id="reference" {% if reference %}value="{{ reference }}"{% endif %}/>
         </div>
         <div class="col-md-4 col-sm-12 py-2">
-            <input class="form-control" type="date" name="date_creation" placeholder="date annonce ici" id="date_creation" />
+            <input class="form-control" type="date" name="date_creation" placeholder="date annonce ici" id="date_creation" {% if date_creation %}value="{{ date_creation }}"{% endif %} />
         </div>
         <div class="col-md-3 col-sm-12 py-2">
             <select class="form-select text-center" name="type_annonce" id="type" placeholder="Type annonce">
-                <option value="0">Type annonce</option>
-                <option value="1">Création</option>
-                <option value="2">Modification</option>
-                <option value="3">Autre</option>
+                <option value="0">Toutes les annonces</option>
+                {% for categorie in categories %}
+                <option value="{{ categorie.0 }}" {% if type_annonce == categorie.0 %}selected{% endif %} >{{ categorie.1 }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="col-md-1 col-sm-12 text-center py-2">
@@ -32,7 +32,7 @@
         </div>
     </form>
 </div>
-<div class="row my-4 justify-content-around">
+{% comment %}<div class="row my-4 justify-content-around">
     {% for annonce in annonces %}
     <div class="card col-md-3 col-sm-12 mx-1 px-0 shadow-sm my-2">
         <div class="card-header col-12   text-center bg-light text-dark">
@@ -47,7 +47,31 @@
         </div>
     </div>
     {% endfor %}
+</div>{% endcomment %}
+{% for annonce in annonces %}
+<div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
+    <div class="col-lg-3 d-none d-lg-block justify-content-center align-items-center">
+        <!--<i class="fa fa-bullhorn fs-4 w-100 h-50 rounded-2 text-center"></i>-->
+        {% qr_from_text "{{ annonce.reference }}" size="M" %}
+    </div>
+    <div class="col-lg-9 col-md-12 h-50">
+        <div class="p-1">
+        <h2 class="card-title fs-2 d-flex justify-content-between">{{ annonce.intitule }} <span class="end-0 badge bg-danger text-white fs-6">Référence: {{ annonce.reference }}</span></h2>
+        <p class="card-text">{{ annonce.contenu }}</p>
+        <p class="card-text"><small class="text-muted"> Par {{ annonce.annonceur }} Le {{ annonce.date_creation}} - pour {{ annonce.annonceur.entreprise }}</small></p>
+        <a class="btn btn-custom text-white end-0" href="{{ annonce.url }}" target="_blank">Détails</a>
+        </div>
+      </div>
 </div>
+{% endfor %}
+{% endblock %}
+{% block extrafooter %}
+<footer class="mt-5">
+    <div class="d-flex justify-content-center align-items-center">
+    <a class="text-white rounded-sm start-0 end-0 fixed-bottom py-1  px-2 w-25 mx-1 btn btn-custom" href="{% url 'nouvelle_annonce' %}">
+        <i class="fas fa-file-circle-plus"></i> Nouvelle Annonce</a>
+    </div>
+</footer>
 {% endblock %}
 {% block extrascripts %}
 {% endblock %}

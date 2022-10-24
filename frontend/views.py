@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponseBadRequest, JsonResponse
 from structure.models import Province, Region, Commune
 from .forms import LoginForm, ContactForm
-from annonce.models import Entreprise, Annonce, Profil
+from annonce.models import Entreprise, Annonce, Profil, CATEGORIE_ANNONCE
 from annonce.forms import EntrepriseForm, AnnonceForm
 from articles.models import Article
 from articles.forms import CommentaireForm	
@@ -86,15 +86,13 @@ def liste_annonces(request):
     if reference:
         annonces = annonces.filter(reference=reference)
     date_creation = request.GET.get('date_creation', None)
-    print(date_creation)
-    print(annonces)
     if date_creation:
         annonces = annonces.filter(date_creation__date=date_creation)
-    print(annonces)
     type_annonce = int(request.GET.get('type_annonce', 0))
     if int(type_annonce) > 0:
         annonces = annonces.filter(type_annonce=type_annonce)
-    return render(request, template_name="frontend/liste_annonces.html", context={'annonces':  annonces})
+    context={'annonces':  annonces, 'categories': CATEGORIE_ANNONCE,'type_annonce':type_annonce, 'reference':reference, 'date_creation': date_creation}
+    return render(request, template_name="frontend/liste_annonces.html", context = context)
 
 
 def inscription(request):
@@ -139,8 +137,19 @@ def annuaire(request):
 
 def user_annonces(request):
     if request.user.is_authenticated:
+        request.session["page_active"]=0
         annonces = request.user.profil.annonces.all()
-        return render(request, template_name="frontend/mes_annonces.html", context={'annonces':  annonces})
+        reference = request.GET.get('reference', None)
+        if reference:
+            annonces = annonces.filter(reference=reference)
+        date_creation = request.GET.get('date_creation', None)
+        if date_creation:
+            annonces = annonces.filter(date_creation__date=date_creation)
+        type_annonce = int(request.GET.get('type_annonce', 0))
+        if int(type_annonce) > 0:
+            annonces = annonces.filter(type_annonce=type_annonce)
+        context={'annonces':  annonces, 'categories': CATEGORIE_ANNONCE,'type_annonce':type_annonce, 'reference':reference, 'date_creation': date_creation}
+        return render(request, template_name="frontend/mes_annonces.html", context=context)
     else:
         return redirect('b-login')
 
@@ -155,7 +164,10 @@ def nouvelle_annonce(request):
 
 def tdb(request):
     if request.user.is_authenticated:
-        return render(request, template_name="frontend/tdb.html")
+        total = request.user.profil.annonces.count()
+        publiees = request.user.profil.annonces.filter(etat=2).count()
+        attente = request.user.profil.annonces.filter(etat=1) .count()
+        return render(request, template_name="frontend/tdb.html", context = {'publiees':publiees, 'total': total, 'attente': attente})
     else:
         return redirect('b-login')
 
