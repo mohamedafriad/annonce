@@ -49,7 +49,7 @@
       nav li.nav-item.active {
         color : white;
         /*transform: scale(1.1);*/
-        background-color: #339933;
+        background-color: #0d6efd;
        }
        nav li.nav-item.active a {
         color : white;
@@ -60,12 +60,12 @@
       </style>
       {% block extrahead %}{% endblock %}
   </head>
-  <body onload="load()">
+  <body onload="load()" >
       <!-- Responsive navbar-->
       <nav class="navbar navbar-expand-lg align-items-center navbar-expand-md col-12 fixed-top text-white">
           <div class="container px-3">
               <a class="navbar-brand text-white px-1 fs-6 rounded-2"  id="navbar-logo" href="{% url 'front' %}"><i class="fas fa-bullhorn"></i> <span>Nachra Annonces</span></a>
-              <button class="navbar-toggler fs-5 border border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler fs-5 border-0 type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <!--<span class="navbar-toggler-icon">Menu</span>-->
                   <i class="fas fa-ellipsis navbar-toggler-icon btn btn-custom text-white"></i> 
               </button>

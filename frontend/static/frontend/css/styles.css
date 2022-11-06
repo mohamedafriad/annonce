@@ -11349,12 +11349,14 @@ a.nav-link:hover {
 .offcanvas a.nav-link:hover {
   color : white;
   transform: scale(1.1);
-  background-color: #339933;
+  /*background-color: #339933;*/
+  background-color: #0d6efd;
 }
 nav li.nav-item:hover {
   color : white;
-  /*transform: scale(1.1);*/
-  background-color: #339933;
+  /*transform: scale(1.1);
+  background-color: #339933;*/
+  background-color: #0d6efd;
 }
 
 .btn-custom {
