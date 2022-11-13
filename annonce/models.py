@@ -34,6 +34,7 @@ class Entreprise(models.Model):
     email = models.CharField("Email", max_length=50, blank=True)
     representant = models.CharField("Représentant", max_length=250, blank=True)
     gerant = models.CharField("Gérant", max_length=250, blank=True)
+    logo = models.ImageField(upload_to ='logos/', null=True, blank=True)
 
     def __str__(self):
         return self.denomination

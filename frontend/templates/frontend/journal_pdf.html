@@ -1,0 +1,209 @@
+{% load static %}{% load l10n %}{% load qr_code %}
+<!DOCTYPE html>
+<html>
+<title>Nachra Annonces - Journal du {{ date_pub }}</title>
+<style>
+    @page {
+        size: a4 portrait;
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+    }
+</style>
+<style type="text/css">
+    @font-face {
+        font-family: "Comfortaa";
+        src: url("static/frontend/fonts/Comfortaa.ttf");
+      }
+      *, body {
+        font-family: "Comfortaa";
+      }
+    /* Bootstrap CSS */
+        .col-md-7 {
+            flex: 0 0 auto;
+            width: 58%;
+        }
+        .container {
+            width: 1320px;
+        }
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+        .justify-content-center {
+            justify-content: center;
+        }
+        .navbar {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: .5rem;
+            padding-bottom: .5rem;
+        }
+        .navbar>.container-fluid {
+            display: flex;
+            flex-wrap: inherit;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar-light .navbar-brand {
+            color: rgba(0, 0, 0, .9);
+        }
+        .navbar-brand {
+            padding-top: .3125rem;
+            padding-bottom: .3125rem;
+            margin-right: 1rem;
+            font-size: 1.25rem;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .flex-column {
+            flex-direction: column !important;
+        }
+        .d-flex {
+            display: flex !important;
+        }
+        .w-50 {
+            width: 50% !important;
+        }
+        .ms-2 {
+            margin-left: .5rem !important;
+        }
+        .p-3 {
+            padding: 1rem !important;
+        }
+
+    /* Custom CSS */
+        body {
+            font-weight: 300;
+            font-size: 14px;
+        }
+        .wrapper {
+            border: 2px solid gray;
+            border-width: 2px;
+        }
+        #location {
+            /* border: 2px solid gray; */
+            border-right: 1px solid gray;
+            border-width: 1px;
+            margin-bottom: 2rem;
+        }
+        .header {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            color: #007cae;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: 100;
+            padding: 10px 20px 0px 20px;
+        }
+        .title span {
+            color: #007cae;
+        }
+        .details {
+            padding: 10px 20px 0px 20px;
+            text-align: left !important;
+        }
+        /* . {
+            margin-left: 455px;
+        } */
+        .hritem {
+            border: 1px solid gray;
+            border-width: 2px;
+        }
+    
+    #header_content {
+        color:  #79aec8;
+        border-bottom: solid #79aec8 1px;
+    }
+    .hr {
+        color:  #79aec8;
+    }
+    #footer_content {
+        color:  #79aec8;
+        border-bottom: solid #79aec8 1px;
+    }
+    .titre {
+        background-color: #D11250;
+        color:  white;
+        padding-top: 4px;
+        text-align: center;
+        border-radius: 5px;
+        font-family: "Comfortaa";
+        border-bottom: solid #79aec8 1px;
+    }
+    .annonce {
+        border-style: solid;
+        border-color: #79aec8;
+        border-radius: 5px;
+        border-bottom: solid #79aec8 1px;
+    }
+</style>
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content" class="d-flex justify-content-around">
+        <span class="flex-column">Nachra Annonces </span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <span class="flex-column">date de publication : {{ date_pub }} </span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <span class="flex-column"> page <pdf:pagenumber></span>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">Autorisation N° 00000 du 00-00-0000
+    </div>
+<h2 class="titre">Actualité</h2>
+{% for article in articles %}
+<div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
+    <div class="col-md-4">
+        <img src="{{ article.image }}" class="img w-100 h-100 rounded-2" />
+    </div>
+    <div class="col-md-8 h-50">
+        <div class="p-1">
+        <h2 class="card-title fs-2">{{ article.titre }} <span class="end-0 badge bg-primary text-white fs-6">Nouveau</span></h2>
+        <p class="card-text">{{ article.contenu }}</p>
+        <p class="card-text"><small class="text-muted"> Par {{ article.auteur }} Le {{ article.date_creation}} - pour {{ article.journal }}</small></p>
+        </div>
+      </div>
+</div>
+{% endfor %}
+<h1 class="titre">Annonces Légales</h1>
+<hr  class="hr"/>
+{% for annonce in annonces %}
+<div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
+    <div class="col-lg-3 d-none d-lg-block justify-content-center align-items-center">
+        <!--<i class="fa fa-bullhorn fs-4 w-100 h-50 rounded-2 text-center"></i>-->
+        {% qr_from_text "{{ annonce.reference }}" size="M" %}
+        <img src="{{ annonce.annonceur.entreprise.logo.url }}" />
+    </div>
+    <div class="col-lg-9 col-md-12 h-50">
+        <div class="p-1">
+        <h2 class="card-title fs-2 d-flex justify-content-between">{{ annonce.intitule }} <span class="end-0 badge bg-danger text-white fs-6 d-flex justify-content-center align-items-center">Réf: {{ annonce.reference }}</span></h2>
+        <p class="card-text">{{ annonce.contenu }}</p>
+        <p class="card-text"><small class="text-muted"> Par {{ annonce.annonceur }} Le {{ annonce.date_creation}} - pour {{ annonce.annonceur.entreprise }}</small></p>
+        </div>
+      </div>
+</div>
+<hr  class="hr"/>
+{% endfor %}
+</body>

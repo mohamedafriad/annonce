@@ -1,0 +1,32 @@
+{% extends "frontend/index.html" %}
+{% load static %}{% load l10n %}
+{% block title %}Téléchargement du journal{% endblock %}
+{% block extrahead %}
+{{ block.super }}
+{% endblock %}
+{% block content %}
+<div class="position-absolute top-50 start-50 translate-middle text-center">
+    <form method="get" action="" class="row">
+      <div class="col-sm-8 col-lg-8">
+        <label>Veuillez choisir une date : </label>
+        <input type="date" name="date_pub" {% if date_pub %} value="{{ date_pub }}"{% endif %}/>
+      </div>
+      <div class="col-sm-4 col-lg-4">
+        <button class="btn btn-custom" type="submit">
+          <i class="fa-solid fa-magnifying-glass fs-4"></i> 
+        </button>
+      </div>
+    </form>
+    <hr />
+    {% if ready %}
+    <div class="row justify-content-center">
+      <button class="btn btn-custom col-lg-4"><i class="fas fa-download"></i> Télécharger</button>
+    </div>
+    {% else %}
+      <p class="bg-custom-red text-white rounded-pill">Veuillez choisir une autre date</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+{% block extrascripts %}
+{% endblock %}

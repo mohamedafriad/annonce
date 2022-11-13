@@ -11,16 +11,40 @@
 </style>
 {% endblock %}
 {% block content %}
+<div class="pt-3">
+    <form class="form row my-1 d-flex justify-content-between align-items-around" method="get">
+        <div class="col-md-4 col-sm-12 py-2">
+            <label for="reference">ICE / RC</label>
+            <input class="form-control" type="text" name="reference" placeholder="ICE/RC annonce ici" id="reference" {% if reference %}value="{{ reference }}"{% endif %}/>
+        </div>
+        <div class="col-md-4 col-sm-12 py-2">
+            <label for="reference">Raison sociale</label>
+            <input class="form-control" type="text" name="reference" placeholder="Raison sociale ici" id="reference" {% if reference %}value="{{ reference }}"{% endif %}/>
+        </div>
+        <div class="col-md-3 col-sm-12 py-2">
+            <label for="type_annonce">Type</label>
+            <select class="form-select text-center" name="type_annonce" id="type" placeholder="Type annonce">
+                <option value="0">Toutes les entreprises</option>
+                {% for categorie in categories %}
+                <option value="{{ categorie.0 }}" {% if type_annonce == categorie.0 %}selected{% endif %} >{{ categorie.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-1 col-sm-12 text-center py-2 d-flex align-items-center justify-content-center">
+            <button class="btn btn-primary col-md-12 col-sm-12" type="submit"><i class="fa-solid fa-solid fa-magnifying-glass"></i> <span class="d-sm-black d-md-none">Rechercher</span></button>
+        </div>
+    </form>
+</div>
 {% for entreprise in entreprises %}
-<div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg align-items-center justify-content-center">
-    <div class="col-lg-4 col-sm-6" >
+<div class="row pt-4 pb-1 my-4 border bg-light border-success rounded-2 shadow-lg align-items-center justify-content-center">
+    <div class="col-lg-3 col-sm-3" >
         {% if entreprise.logo %}
-        <img src="{{ entreprise.logo }}" class="img w-100 h-100 rounded-2" />
+        <img src="{{ entreprise.logo.url }}" class="img w-100 h-100 rounded-2" />
         {% else %}
         <img src="{% static 'frontend/img/no-photo.png' %}" class="img w-100 h-100 rounded-2" />
         {% endif %}
     </div>
-    <div class="col-lg-8 col-sm-6 h-50">
+    <div class="col-lg-6 col-sm-6 h-50">
         <div class="p-1">
         <h2 class="card-title fs-2">{{ entreprise.raison_soc }} <span class="end-0 badge bg-primary text-white fs-6">{{ entreprise.get_forme_display }}</span></h2>
         <p class="card-text"><i class="fas fa-address-card"></i> ICE: {{ entreprise.ice }}</p>
@@ -30,15 +54,16 @@
         <p class="card-text"><i class="fas fa-at"></i> {{ entreprise.email }}</p>
       </div>
     </div>
+    <div class="col-lg-3 col-sm-3">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d54755.99441747804!2d-6.9676089589006285!3d30.93559130331144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdbb104077422057%3A0x26b3cb529b37ab00!2sOuarzazate%2045000!5e0!3m2!1sfr!2sma!4v1668355423542!5m2!1sfr!2sma" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="100%" ></iframe>
+    </div>
 </div>
 {% endfor %}
+<a class="text-white rounded-pill  fixed-bottom bg-custom-red col-1 text-center w-2 mb-1" href="#">
+    <i class="fas fa-arrow-up fs-2 text-white"></i>
+</a>
 {% endblock %}
 {% block extrafooter %}
-<footer class="row-fluid pt-5 bg-light">
-    <a class="text-white rounded-sm start-0  fixed-bottom p-1 w-0" href="#">
-        <i class="fas fa-arrow-up fs-2 text-danger"></i>
-    </a>
-</footer>
 {% endblock %}
 {% block extrascripts %}
 {% endblock %}

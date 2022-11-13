@@ -42,6 +42,5 @@ urlpatterns = [
     path('annonces/', front_views.liste_annonces, name="liste_annonces"),   # liste annonces
     path('annonce/nouvelle/', front_views.nouvelle_annonce, name="nouvelle_annonce"),   # nouvelle annonce    
     path('annonces/user/', front_views.user_annonces, name="mes_annonces"),   # mes annonces
-
-
+    path('annonces/journal/', front_views.journal, name="journal"),
 ]

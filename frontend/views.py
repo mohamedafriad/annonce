@@ -177,6 +177,21 @@ def packs(request):
         return render(request, template_name="frontend/packs.html")
     else:
         return redirect('b-login')
+
+
+from utils import render_to_pdf
+def journal(request):
+    if request.user.is_authenticated:
+        date_pub = request.GET.get('date_pub', None)
+        if date_pub :
+            annonces = Annonce.objects.filter(date_publication=date_pub)
+            articles = Article.objects.filter(date_publication=date_pub)
+            return render_to_pdf("frontend/journal_pdf.html", context_dict={'date_pub':date_pub, 'annonces': annonces, 'articles':articles})
+        else:
+            return render(request, template_name="frontend/journal.html")
+    else:
+        return redirect('b-login')
+
 """
 # view pour rediriger les requetes 404 vers la page d'accueil
 def not_found_view(request):
