@@ -2,6 +2,7 @@
 {% load static %}{% load l10n %}
 {% block title %}Mon Tableau de bord{% endblock %}
 {% block extrahead %}
+{{ block.super }}
 <style>
 .scrollview {
   overflow-x: scroll;
@@ -13,12 +14,11 @@
 {% block content %}
 <div class="row gx-4 gx-lg-5 align-items-center justify-content-center pt-5">
     <div class="card text-center col-sm-12 col-md-6 shadow-lg px-0" >
-      <div class="card-header text-center col-md-12 bg-info">
+      <div class="card-header text-center col-md-12 bg-custom-red">
         <h4 class="col-md-12 text-white px-0"><i class="fa fa-vault"></i> Mon Solde</h4>
       </div>
       <div class="card-body">
-        <h4 class="card-title">Mon solde actuel est de : </h4>
-        <h4 class="card-title">10 Annonce(s)</h4>
+        <h4 class="card-title"><span id="solde" class="fs-2"></span> Annonce(s)</h4>
       </div>
       <div class="card-footer text-center">
         <a href="{% url 'packs' %}" class="btn btn-custom">Alimenter mon solde</a>
@@ -88,7 +88,9 @@
       let text1 = document.getElementById('0101');
       let text2 = document.getElementById('0102');
       let text3 = document.getElementById('0103');
+      let solde = document.getElementById('solde');
       const load = () => {
+         animate(solde, 50, 10-{{ total }}, 7000);
          animate(text1, 50, {{ total }}, 7000);
          animate(text2, 50, {{ publiees }}, 7000);
          animate(text3, 50, {{ attente }}, 7000);

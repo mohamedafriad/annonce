@@ -57,6 +57,9 @@
        button.navbar-toggler {
         border: none;
        }
+       .bg-custom-red {
+           background-color: #D11250;
+       }
       </style>
       {% block extrahead %}{% endblock %}
   </head>
@@ -67,7 +70,7 @@
               <a class="navbar-brand text-white px-1 fs-6 rounded-2"  id="navbar-logo" href="{% url 'front' %}"><i class="fas fa-bullhorn"></i> <span>Nachra Annonces</span></a>
               <button class="navbar-toggler fs-5 border-0 type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <!--<span class="navbar-toggler-icon">Menu</span>-->
-                  <i class="fas fa-ellipsis navbar-toggler-icon btn btn-custom text-white"></i> 
+                  <i class="fas fa-ellipsis navbar-toggler-icon btn btn-custom text-white"></i>
               </button>
               <div class="collapse navbar-collapse container-fluid justify-content-center" id="navbarSupportedContent" >
                   <ul class="navbar-nav ms-auto mb-2 mb-lg-0 pt-sm-2">
@@ -76,9 +79,6 @@
                       </li>
                       <li class="nav-item px-2 d-sm-block {% if request.session.page_active == 2 %}active{% endif %}">
                         <a class="nav-link fs-6 text-white" aria-current="page" href="{% url 'liste_annonces' %}"><i class="fa-solid fa-bullhorn"></i> Annonces</a>
-                      </li>
-                      <li class="nav-item px-2 d-md-none d-sm-block  {% if request.session.page_active == 2 %}active{% endif %}">
-                        <a class="nav-link fs-6 text-white" aria-current="page" href="{% url 'nouvelle_annonce' %}"><i class="fa-solid fa-file-circle-plus"></i> Nouvelle Annonce</a>
                       </li>
                       <li class="nav-item px-2  {% if request.session.page_active == 3 %}active{% endif %}">
                         <a class="nav-link fs-6 text-white" aria-current="page" href="{% url 'annuaire' %}"><i class="fa-solid fa-address-card"></i> Annuaire</a>
