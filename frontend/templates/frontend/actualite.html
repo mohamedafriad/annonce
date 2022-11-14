@@ -22,9 +22,9 @@
     {% for article in articles %}
     <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-bs-interval="5000">
       <img src="{{ article.image }}" class="d-block w-100 rounded rounded-2" alt="...">
-      <div class="carousel-caption d-none d-md-block text-white bg-danger rounded rounded-2">
+      <div class="carousel-caption">
         <h5>
-            <a href="{% url 'article' pk=article.pk %}" class="text-white text-decoration-none">{{ article.titre }}</a>
+            <a href="{% url 'article' pk=article.pk %}" class="text-white bg-danger rounded-2 text-decoration-none fs-6">{{ article.titre }}</a>
         </h5>
       </div>
     </div>
