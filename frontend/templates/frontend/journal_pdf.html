@@ -126,11 +126,18 @@
             margin-left: 455px;
         } */
         .hritem {
-            border: 1px solid gray;
+            border: 1px solid #79aec8;
             border-width: 2px;
+        }
+        hr {
+            color: #79aec8;
         }
     
     #header_content {
+        color:  #79aec8;
+        border-bottom: solid #79aec8 1px;
+    }
+    #header_div {
         color:  #79aec8;
         border-bottom: solid #79aec8 1px;
     }
@@ -167,16 +174,14 @@
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
         <span class="flex-column"> page <pdf:pagenumber></span>
+        <hr class="hritem" width="100%" color="#79aec8" />
     </div>
 
-    <!-- Content for Static Frame 'footer_frame' -->
-    <div id="footer_content">Autorisation N° 00000 du 00-00-0000
-    </div>
 <h2 class="titre">Actualité</h2>
 {% for article in articles %}
 <div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
     <div class="col-md-4">
-        <img src="{{ article.image }}" class="img w-100 h-100 rounded-2" />
+        <img src="uploads/{{ article.affiche }}" class="img w-100 h-100 rounded-2" style="border-radius:5px"/>
     </div>
     <div class="col-md-8 h-50">
         <div class="p-1">
@@ -188,22 +193,19 @@
 </div>
 {% endfor %}
 <h1 class="titre">Annonces Légales</h1>
-<hr  class="hr"/>
+<table>
 {% for annonce in annonces %}
-<div class="row pt-4 pb-1 my-4 border border-success rounded-2 shadow-lg">
-    <div class="col-lg-3 d-none d-lg-block justify-content-center align-items-center">
-        <!--<i class="fa fa-bullhorn fs-4 w-100 h-50 rounded-2 text-center"></i>-->
-        {% qr_from_text "{{ annonce.reference }}" size="M" %}
-        <img src="{{ annonce.annonceur.entreprise.logo.url }}" />
-    </div>
-    <div class="col-lg-9 col-md-12 h-50">
-        <div class="p-1">
-        <h2 class="card-title fs-2 d-flex justify-content-between">{{ annonce.intitule }} <span class="end-0 badge bg-danger text-white fs-6 d-flex justify-content-center align-items-center">Réf: {{ annonce.reference }}</span></h2>
+<tr style="border-bottom:solid #79aec8 1px;">
+    <td><img src="uploads/{{ annonce.annonceur.entreprise.logo }}" /></td>
+    <td colspan="3">
+            <h2 class="card-title fs-2 d-flex justify-content-between">{{ annonce.intitule }} <span class="end-0 badge bg-danger text-white fs-6 d-flex justify-content-center align-items-center">Réf: {{ annonce.reference }}</span></h2>
         <p class="card-text">{{ annonce.contenu }}</p>
         <p class="card-text"><small class="text-muted"> Par {{ annonce.annonceur }} Le {{ annonce.date_creation}} - pour {{ annonce.annonceur.entreprise }}</small></p>
-        </div>
-      </div>
-</div>
-<hr  class="hr"/>
+    </td>
+</tr>
 {% endfor %}
+</table>
+<!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">Autorisation N° 00000 du 00-00-0000
+    </div>
 </body>

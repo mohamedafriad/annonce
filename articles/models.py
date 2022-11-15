@@ -11,6 +11,7 @@ class Article(models.Model):
 	image = models.URLField("Affiche", blank=True, null=True)
 	url = models.URLField("Lien", blank=True, null=True)
 	categorie = models.CharField("Catégorie", max_length=50, blank=True)
+	affiche = models.ImageField(upload_to ='articles/', null=True, blank=True)
 
 	def __str__(self):
 		return self.titre

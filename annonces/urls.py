@@ -34,7 +34,7 @@ else:
 urlpatterns = [
     path('', include('frontend.urls')), # frontend URL
     path('grappelli/', include('grappelli.urls')), # grappelli URL
-    path('admin/', admin.site.urls),
+    path('backend/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
